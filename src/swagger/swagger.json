@@ -1,0 +1,169 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Backend API",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "host": "localhost:3001/backend",
+  "basePath": "/api/v1/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/company": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Company"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "body",
+            "description": "new object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": ""
+                },
+                "acronym": {
+                  "type": "string",
+                  "example": ""
+                },
+                "active": {
+                  "type": "number",
+                  "example": 0
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      }
+    },
+    "/company/{id}": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Company"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "body",
+            "description": "update object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": ""
+                },
+                "acronym": {
+                  "type": "string",
+                  "example": ""
+                },
+                "active": {
+                  "type": "number",
+                  "example": 0
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Company"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      }
+    }
+  }
+}
