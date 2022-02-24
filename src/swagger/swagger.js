@@ -16,7 +16,7 @@ const keycloak_url = environment.configuration.keycloak_url
 const outputInitialSettings = {
   basePath: `/${basePath}/`,
   host: `${host}:${port}/backend`,    
-  schemes: ['http','https'],
+  schemes: environment.configuration.host==='localhost'?['http']:['https'],
   info: {
     "title": "Backend API"
   },
