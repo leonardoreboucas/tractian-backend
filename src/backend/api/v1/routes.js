@@ -368,9 +368,8 @@ module.exports = (app) => {
         const targetPath = path.join(targetFolder, `./${id}.png`);
         fs.mkdirSync(targetFolder, {recursive:true})
         if (path.extname(req.file.originalname).toLowerCase() === ".png") {
-          fs.rename(tempPath, targetPath, err => {
+          fs.copyFile(tempPath, targetPath, err => {
             if (err) return handleError(err, res);
-    
             res
               .status(200)
               .contentType("text/plain")
