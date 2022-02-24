@@ -1,9 +1,8 @@
 const conn = require('../database/connection')
 const collection='company'
-//const ObjectID = require('mongodb').ObjectID;
-
+const mongodb = require('mongodb')
 const getById = async (id, collection) => {
-    const listingQuery = { _id: new ObjectID(id)}
+    const listingQuery = { _id: new mongodb.ObjectId(id)}
     return new Promise((resolve, reject) => {
         conn.connectToServer(()=>{})
             conn.getDb()
@@ -19,12 +18,14 @@ const getById = async (id, collection) => {
     })
 }
 
-const getPage = async (queryParams={}, collection) => {
+const getPage = async (filter="{}", sort={_id:1}, collection) => {
     return new Promise((resolve, reject) => {
         conn.connectToServer(()=>{})
             conn.getDb()
                 .collection(collection)
-                .find(queryParams).limit(50)
+                .find(JSON.parse(filter))
+                .limit(50)
+                .sort(sort)
                 .toArray(function (err, result) {
                     if (err) {
                         console.err(err)
@@ -54,7 +55,7 @@ const create = (params, collection) => {
 
 const update = (id, params, collection) => {
 
-    const listingQuery = { _id: new ObjectID(id)};
+    const listingQuery = { _id: new mongodb.ObjectId(id)};
     const updadeDocument = { $set: params }
     return new Promise((resolve, reject) => {
         conn.connectToServer(()=>{})
@@ -72,7 +73,7 @@ const update = (id, params, collection) => {
 }
 
 const remove = (id) => {
-    const listingQuery = { _id: new ObjectID(id)};
+    const listingQuery = { _id: new mongodb.ObjectId(id)};
     return new Promise((resolve, reject) => {
         conn.connectToServer(()=>{})
             conn.getDb()

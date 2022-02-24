@@ -60,6 +60,12 @@
           "200": {
             "description": "Successful"
           },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Error on server"
           }
@@ -131,6 +137,9 @@
           "200": {
             "description": "Successful"
           },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -161,6 +170,565 @@
           },
           "500": {
             "description": "Error on server"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "body",
+            "description": "new object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": ""
+                },
+                "password": {
+                  "type": "string",
+                  "example": ""
+                },
+                "active": {
+                  "type": "number",
+                  "example": 0
+                },
+                "company_id": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "body",
+            "description": "update object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": ""
+                },
+                "password": {
+                  "type": "string",
+                  "example": ""
+                },
+                "active": {
+                  "type": "number",
+                  "example": 0
+                },
+                "company_id": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      }
+    },
+    "/unit": {
+      "get": {
+        "tags": [
+          "Unit"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Unit"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "body",
+            "description": "new object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": ""
+                },
+                "company_id": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      }
+    },
+    "/unit/{id}": {
+      "get": {
+        "tags": [
+          "Unit"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Unit"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "body",
+            "description": "update object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": ""
+                },
+                "company_id": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Unit"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      }
+    },
+    "/asset": {
+      "get": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "body",
+            "description": "new object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "unit_id": {
+                  "type": "string",
+                  "example": ""
+                },
+                "image": {
+                  "type": "string",
+                  "example": ""
+                },
+                "name": {
+                  "type": "string",
+                  "example": ""
+                },
+                "description": {
+                  "type": "string",
+                  "example": ""
+                },
+                "model": {
+                  "type": "string",
+                  "example": ""
+                },
+                "owner": {
+                  "type": "string",
+                  "example": ""
+                },
+                "status": {
+                  "type": "string",
+                  "example": ""
+                },
+                "health_level": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      }
+    },
+    "/asset/{id}": {
+      "get": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "body",
+            "description": "update object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "unit_id": {
+                  "type": "string",
+                  "example": ""
+                },
+                "image": {
+                  "type": "string",
+                  "example": ""
+                },
+                "name": {
+                  "type": "string",
+                  "example": ""
+                },
+                "description": {
+                  "type": "string",
+                  "example": ""
+                },
+                "model": {
+                  "type": "string",
+                  "example": ""
+                },
+                "owner": {
+                  "type": "string",
+                  "example": ""
+                },
+                "status": {
+                  "type": "string",
+                  "example": ""
+                },
+                "health_level": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      }
+    },
+    "/upload": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "imgID": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

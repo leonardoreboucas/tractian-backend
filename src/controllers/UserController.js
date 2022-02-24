@@ -1,5 +1,7 @@
 const dao = require('../dao/defaultDAO')
-const collection = 'company'
+const collection = 'user'
+const validator = require('../utils/validator');
+
 
 module.exports = (app) => {
 
@@ -7,8 +9,12 @@ module.exports = (app) => {
     try {
       const { id } = req.params
       const result = await dao.getById(id, collection)
+      if (result && Boolean(req.params.withParents)){
+        const company = await dao.getById(result.company_id, "company")
+        result.company = company
+      }
       let status_code = 200
-      if (Object.keys(result).length === 0){
+      if (!result || Object.keys(result).length === 0){
         status_code = 404
       }
       return (res) ? res.status(status_code).json(result) : result;        
@@ -26,7 +32,13 @@ module.exports = (app) => {
           delete sort.name
           sort[field] = ascendence === 'desc' ? -1 : 1 
         }
-        const result = await dao.getPage(req.query.filter, sort, collection);
+        const result = await dao.getPage(req.query.filter, sort, aggregate, collection);
+        if (result.length && Boolean(req.query.withParents)){
+          for (let i in result){
+            const company = await dao.getById(result[i].company_id, "company")
+            result[i].company = company
+          }
+        }
         return (res) ? res.json(result) : result;
     } catch (error) {
         return (res) ? res.status(500).json(`Error: ${error}`) : `Error: ${error}`
@@ -36,9 +48,19 @@ module.exports = (app) => {
   const update = async (req, res) => {
     try {
         const { id } = req.params
+        //Check if Company exists
+        if (req.body.company_id){
+          const company = await dao.getById(req.body.company_id, "company")
+          if (company === null){
+            return res.status(400).json({
+              success: false,
+              errors: ["company not found"]
+            });
+          }
+        }
         const result = await dao.update(id, req.body, collection)
         let status_code = 200
-        if (!result){
+        if (!result || !result.modifiedCount){
           status_code = 404
         }
         return (res) ? res.status(status_code).json(result) : result;        
@@ -49,6 +71,23 @@ module.exports = (app) => {
 
   const create = async (req, res) => {
     try {
+        const hasError = validator.check(req)
+        if (hasError) {
+            return res.status(400).json({
+                success: false,
+                errors: hasError.array()
+            });
+        }
+
+        //Check if Company exists
+        const company = await dao.getById(req.body.company_id, "company")
+        if (company === null){
+          return res.status(400).json({
+            success: false,
+            errors: ["company not found"]
+          });
+        }
+
         const result = await dao.create(req.body, collection)
         return res.json(result);
     } catch (error) {
