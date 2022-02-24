@@ -10,7 +10,7 @@ app.basePath = basePath
 app.db = db;
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb',extended: true}));
-
+app.use('/uploads', express.static('src/backend/api/v1/uploads'));
 app.get('/', function(req, res) {
   res.redirect(`/backend/api-doc`);
 });
