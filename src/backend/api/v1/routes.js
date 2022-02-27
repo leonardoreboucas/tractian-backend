@@ -9,7 +9,7 @@ const router = express.Router();
 const { body } = require('express-validator')
 const path = require("path");
 const fs = require("fs");
-const environment = require("../config/environment");
+const environment = require("../../../config/environment");
 const multer = require("multer");
 
 const handleError = (err, res) => {
