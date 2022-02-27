@@ -8,7 +8,7 @@ const swaggerOutputTemp = "swagger_temp.json"
 const outputFile = `./src/swagger/${swaggerOutput}`
 const outputTempFile = `./src/swagger/${swaggerOutputTemp}`
 const host = `${environment.configuration.host}`
-const port = ``
+const port = environment.configuration.host==='localhost'?environment.configuration.port:''
 const basePath = `api/v${environment.configuration.apiVersion}`;
 const endpointsFiles = [`./src/backend/${basePath}/routes.js`]
 const keycloak_client_secret = environment.configuration.keycloak_client_secret

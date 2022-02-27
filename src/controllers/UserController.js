@@ -32,11 +32,20 @@ module.exports = (app) => {
           delete sort.name
           sort[field] = ascendence === 'desc' ? -1 : 1 
         }
-        const result = await dao.getPage(req.query.filter, sort, aggregate, collection);
-        if (result.length && Boolean(req.query.withParents)){
-          for (let i in result){
-            const company = await dao.getById(result[i].company_id, "company")
-            result[i].company = company
+        const limit = req.query.limit || 10
+        const page = req.query.page || 1
+        let query = {}
+        if (req.query.fields && req.query.q ){
+          query = {$or: []}
+          for (const fieldIdx in req.query.fields.split(',')){
+            query.$or.push({ [req.query.fields.split(',')[fieldIdx]]: { $regex: req.query.q } });
+          }
+        }
+        const result = await dao.getPage(query, sort, limit, page, collection);
+        if (result.result.length){
+          for (let i in result.result){
+            const company = await dao.getById(result.result[i].company_id, "company")
+            result.result[i].company = company
           }
         }
         return (res) ? res.json(result) : result;
@@ -60,7 +69,7 @@ module.exports = (app) => {
         }
         const result = await dao.update(id, req.body, collection)
         let status_code = 200
-        if (!result || !result.modifiedCount){
+        if (!result || !result.result.modifiedCount){
           status_code = 404
         }
         return (res) ? res.status(status_code).json(result) : result;        

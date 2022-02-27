@@ -32,7 +32,7 @@ module.exports = (app) => {
   *                   Company
   ********************************************/
   const companyValidation = [
-    body('name').isLength(10),
+    body('name').isLength({ min: 10, max: 50 })    
   ]
   router
   .route(`/company`)
@@ -73,7 +73,7 @@ module.exports = (app) => {
         #swagger.responses[500] = { description: "Error on server"}
       */
     )
-    .put(
+    .patch(
       companyValidation,
       app.controllers.CompanyController.update
       /* >>> SWAGGER DOCUMENTATION (DONT DELETE) <<<
@@ -108,10 +108,11 @@ module.exports = (app) => {
   *                   User
   ********************************************/
   const userValidation = [
-    body('username').isEmail(),
-    body('password').isLength({ min: 8 }),
+    body('name').notEmpty().isLength({ min: 10, max: 50 }),
+    body('username').notEmpty().isLength({ min: 8, max: 20 }),
+    body('password').isLength({ min: 8, max: 20 }),
     body('active').isBoolean(),
-    body('company_id').isLength(8),
+    body('company_id').notEmpty(),
   ]
   router
   .route(`/user`)
@@ -155,7 +156,7 @@ module.exports = (app) => {
         #swagger.responses[500] = { description: "Error on server"}
       */
     )
-    .put(
+    .patch(
       userValidation,
       app.controllers.UserController.update
       /* >>> SWAGGER DOCUMENTATION (DONT DELETE) <<<
@@ -233,7 +234,7 @@ module.exports = (app) => {
         #swagger.responses[500] = { description: "Error on server"}
       */
     )
-    .put(
+    .patch(
       unitValidation,
       app.controllers.UnitController.update
       /* >>> SWAGGER DOCUMENTATION (DONT DELETE) <<<
@@ -268,11 +269,11 @@ module.exports = (app) => {
   ********************************************/
    const assetValidation = [
     body('unit_id').isLength(8),
-    body('image').isString(),
+    
     body('name').isString(),
     body('description').isString(),
     body('model').isString(),
-    body('owner').isString(),
+    body('owner_id').isLength(8),
     body('status').matches(/\b(?:Running|Alerting|Stopped)\b/),
     body('health_level').isNumeric()
   ]
@@ -322,7 +323,7 @@ module.exports = (app) => {
         #swagger.responses[500] = { description: "Error on server"}
       */
     )
-    .put(
+    .patch(
       assetValidation,
       app.controllers.AssetController.update
       /* >>> SWAGGER DOCUMENTATION (DONT DELETE) <<<
@@ -373,7 +374,7 @@ module.exports = (app) => {
             res
               .status(200)
               .contentType("text/plain")
-              .end("File uploaded!");
+              .json({result:`http://localhost:3001/uploads/${id}.png`});
           });
         } else {
           fs.unlink(tempPath, err => {
@@ -386,7 +387,36 @@ module.exports = (app) => {
           });
         }
       }
+      /* >>> SWAGGER DOCUMENTATION (DONT DELETE) <<<
+        #swagger.tags = ['Misc']
+        #swagger.responses[200] = { description: "Successful"}
+        #swagger.responses[404] = { description: "Not Found" }
+        #swagger.responses[500] = { description: "Error on server"}
+        */
     );
+
+  router
+    .route(`/login`)
+      .post((req, res) => {
+        return res.json({"success":true,"result":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU4NzUzOTksImlkIjoiNjBiNGUyODJlYjMxNGIwMDE1ZmFmMmE5IiwiaWF0IjoxNjQ1Nzg4OTk5fQ.C92SLTyZAR-TIGOeFJTxMYT3bMO_1hlIF_KG0W2Ca0Y","admin":{"id":"60b4e282eb314b0015faf2a9","name":"admin","isLoggedIn":true}},"message":"Successfully login admin"})
+      }
+       /* >>> SWAGGER DOCUMENTATION (DONT DELETE) <<<
+        #swagger.tags = ['Misc']
+        #swagger.parameters['login'] = {
+                description: 'login',
+                in: 'query',
+                required: true
+            }
+        #swagger.parameters['password'] = {
+                description: 'password',
+                in: 'query',
+                required: true
+            }
+        #swagger.responses[200] = { description: "Successful"}
+        #swagger.responses[404] = { description: "Not Found" }
+        #swagger.responses[500] = { description: "Error on server"}
+        */
+      )
 
   app.use(app.basePath, router);
 };

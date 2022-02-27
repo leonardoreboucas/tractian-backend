@@ -32,11 +32,26 @@ module.exports = (app) => {
           delete sort.name
           sort[field] = ascendence === 'desc' ? -1 : 1 
         }
-        const result = await dao.getPage(req.query.filter, sort, collection);
-        if (result.length && Boolean(req.query.withParents)){
-          for (let i in result){
-            const unit = await dao.getById(result[i].unit_id, "unit")
-            result[i].unit = unit
+        const limit = req.query.limit || 10
+        const page = req.query.page || 1
+        let query = {}
+        if (req.query.fields && req.query.q ){
+          query = {$or: []}
+          for (const fieldIdx in req.query.fields.split(',')){
+            query.$or.push({ [req.query.fields.split(',')[fieldIdx]]: { $regex: req.query.q } });
+          }
+        }
+        const result = await dao.getPage(query, sort, limit, page, collection);
+        if (result.result.length){
+          for (let i in result.result){
+            if (result.result[i].unit_id){
+              const unit = await dao.getById(result.result[i].unit_id, "unit")
+              result.result[i].unit = unit
+            }
+            if (result.result[i].owner_id){
+              const owner = await dao.getById(result.result[i].owner_id, "user")
+              result.result[i].owner = owner
+            }
           }
         }
         return (res) ? res.json(result) : result;
@@ -60,7 +75,7 @@ module.exports = (app) => {
         }
         const result = await dao.update(id, req.body, collection)
         let status_code = 200
-        if (!result || !result.modifiedCount){
+        if (!result || !result.result.modifiedCount){
           status_code = 404
         }
         return (res) ? res.status(status_code).json(result) : result;        

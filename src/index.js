@@ -1,13 +1,17 @@
 const express = require("express");
+const bodyParser = require('body-parser')
 const consign = require("consign");
 const db = require("./database/connection").connectToServer(()=>{})
 const environment = require("./config/environment")
 const http = require('http')
 const app = express();
+
 const apiVersion = environment.configuration.apiVersion
 const basePath = `/backend/api/v${apiVersion}`;
 app.basePath = basePath
 app.db = db;
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb',extended: true}));
 app.use('/uploads', express.static('src/backend/api/v1/uploads'));

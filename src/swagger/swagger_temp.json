@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "description": ""
   },
-  "host": "localhost:/backend",
+  "host": "localhost:3001/backend",
   "basePath": "/api/v1/",
   "schemes": [
     "http"
@@ -54,6 +54,20 @@
                 }
               }
             }
+          },
+          {
+            "name": "login",
+            "description": "login",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -98,7 +112,32 @@
           }
         }
       },
-      "put": {
+      "delete": {
+        "tags": [
+          "Company"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "patch": {
         "tags": [
           "Company"
         ],
@@ -131,6 +170,20 @@
                 }
               }
             }
+          },
+          {
+            "name": "login",
+            "description": "login",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -139,31 +192,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Error on server"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Company"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful"
           },
           "404": {
             "description": "Not Found"
@@ -221,6 +249,20 @@
                 }
               }
             }
+          },
+          {
+            "name": "login",
+            "description": "login",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -265,7 +307,32 @@
           }
         }
       },
-      "put": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "patch": {
         "tags": [
           "User"
         ],
@@ -302,6 +369,20 @@
                 }
               }
             }
+          },
+          {
+            "name": "login",
+            "description": "login",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -310,31 +391,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Error on server"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "User"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful"
           },
           "404": {
             "description": "Not Found"
@@ -384,6 +440,20 @@
                 }
               }
             }
+          },
+          {
+            "name": "login",
+            "description": "login",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -428,7 +498,32 @@
           }
         }
       },
-      "put": {
+      "delete": {
+        "tags": [
+          "Unit"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "patch": {
         "tags": [
           "Unit"
         ],
@@ -457,6 +552,20 @@
                 }
               }
             }
+          },
+          {
+            "name": "login",
+            "description": "login",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -465,31 +574,6 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Error on server"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Unit"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful"
           },
           "404": {
             "description": "Not Found"
@@ -563,6 +647,20 @@
                 }
               }
             }
+          },
+          {
+            "name": "login",
+            "description": "login",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -607,7 +705,32 @@
           }
         }
       },
-      "put": {
+      "delete": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      },
+      "patch": {
         "tags": [
           "Asset"
         ],
@@ -660,6 +783,20 @@
                 }
               }
             }
+          },
+          {
+            "name": "login",
+            "description": "login",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -676,35 +813,13 @@
             "description": "Error on server"
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "Asset"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Error on server"
-          }
-        }
       }
     },
     "/upload": {
       "post": {
+        "tags": [
+          "Misc"
+        ],
         "description": "",
         "parameters": [
           {
@@ -722,13 +837,51 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successful"
           },
           "403": {
             "description": "Forbidden"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Error on server"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Misc"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "login",
+            "description": "login",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Error on server"
           }
         }
       }

@@ -26,7 +26,16 @@ module.exports = (app) => {
           delete sort.name
           sort[field] = ascendence === 'desc' ? -1 : 1 
         }
-        const result = await dao.getPage(req.query.filter, sort, collection);
+        const limit = req.query.limit || 10
+        const page = req.query.page || 1
+        let query = {}
+        if (req.query.fields && req.query.q ){
+          query = {$or: []}
+          for (const fieldIdx in req.query.fields.split(',')){
+            query.$or.push({ [req.query.fields.split(',')[fieldIdx]]: { $regex: req.query.q } });
+          }
+        }
+        const result = await dao.getPage(query, sort, limit, page,  collection);
         return (res) ? res.json(result) : result;
     } catch (error) {
         return (res) ? res.status(500).json(`Error: ${error}`) : `Error: ${error}`
