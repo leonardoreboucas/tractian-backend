@@ -374,7 +374,7 @@ module.exports = (app) => {
             res
               .status(200)
               .contentType("text/plain")
-              .json({result:`http://${environment.configuration.host}:${environment.configuration.port}/uploads/${id}.png`});
+              .json({result:`https://${environment.configuration.host}/uploads/${id}.png`});
           });
         } else {
           fs.unlink(tempPath, err => {
