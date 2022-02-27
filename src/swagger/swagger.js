@@ -11,8 +11,6 @@ const host = `${environment.configuration.host}`
 const port = environment.configuration.host==='localhost'?environment.configuration.port:''
 const basePath = `api/v${environment.configuration.apiVersion}`;
 const endpointsFiles = [`./src/backend/${basePath}/routes.js`]
-const keycloak_client_secret = environment.configuration.keycloak_client_secret
-const keycloak_url = environment.configuration.keycloak_url
 const outputInitialSettings = {
   basePath: `/${basePath}/`,
   host: `${host}:${port}/backend`,    

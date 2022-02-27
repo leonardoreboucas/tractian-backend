@@ -1,9 +1,9 @@
 {
-  "name": "orama-backend",
+  "name": "tractian-backend",
   "version": "1.0.0",
   "private": false,
-  "repository": "https://github.com/unb-faas/orama",
-  "description": "Orama Backend",
+  "repository": "https://github.com/leonardoreboucas/tractian",
+  "description": "Tractian Backend",
   "main": "index.js",
   "scripts": {
     "start": "    cross-env NODE_ENV=development node  --expose-gc    src/index.js",

@@ -9,7 +9,7 @@ const router = express.Router();
 const { body } = require('express-validator')
 const path = require("path");
 const fs = require("fs");
-
+const environment = require("../config/environment");
 const multer = require("multer");
 
 const handleError = (err, res) => {
@@ -374,7 +374,7 @@ module.exports = (app) => {
             res
               .status(200)
               .contentType("text/plain")
-              .json({result:`http://localhost:3001/uploads/${id}.png`});
+              .json({result:`http://${environment.configuration.host}:${environment.configuration.port}/uploads/${id}.png`});
           });
         } else {
           fs.unlink(tempPath, err => {
