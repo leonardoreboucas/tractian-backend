@@ -78,16 +78,19 @@ const create = (params, collection) => {
 }
 
 const update = (id, params, collection) => {
-
     const listingQuery = { _id: new mongodb.ObjectId(id)};
-    const updadeDocument = { $set: params }
+    conn.connectToServer(()=>{})
+            conn.getDb()
+                .collection(`${collection}-history`)
+                .insertOne({date:new Date(),params:Object.assign({_id:id},params)})
+    const updadeDocument = { $set: Object.assign({},params) }
     return new Promise((resolve, reject) => {
         conn.connectToServer(()=>{})
             conn.getDb()
                 .collection(collection)
                 .updateOne(listingQuery, updadeDocument, function (err, result) {
                     if (err) {
-                        console.err(err)
+                        console.log(err)
                         return  reject(err)
                     } else {
                         return resolve({

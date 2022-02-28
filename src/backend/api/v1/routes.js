@@ -313,6 +313,17 @@ module.exports = (app) => {
       */
     )
   router
+    .route(`/asset/history`)
+      .get(
+        app.controllers.AssetController.history
+        /* >>> SWAGGER DOCUMENTATION (DONT DELETE) <<<
+          #swagger.tags = ['Asset']
+          #swagger.responses[200] = { description: "Successful"}
+          #swagger.responses[500] = { description: "Error on server"}
+          
+          */
+      )
+  router
   .route(`/asset/:id`)
     .get(
       app.controllers.AssetController.get

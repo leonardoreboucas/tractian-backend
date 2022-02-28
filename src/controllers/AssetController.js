@@ -60,6 +60,51 @@ module.exports = (app) => {
     }
   };
 
+  const history = async (req, res) => {
+    try {
+        let sort = {_id:1}
+        if (req.query.sort){
+          const field = req.query.sort.split(':')[0] || 'name'
+          const ascendence = req.query.sort.split(':')[1] || 'asc'
+          delete sort.name
+          sort[field] = ascendence === 'desc' ? -1 : 1 
+        }
+        const limit = req.query.limit || 100
+        const page = req.query.page || 1
+        let query = {}
+        if (req.query.fields && req.query.q ){
+          query = {$or: []}
+          for (const fieldIdx in req.query.fields.split(',')){
+            query.$or.push({ [req.query.fields.split(',')[fieldIdx]]: { $regex: req.query.q } });
+          }
+        }
+        const result = await dao.getPage(query, sort, limit, page, `${collection}-history`);
+        const history = {}
+        if (result.result.length){
+          for (const i in result.result){
+            const assetHistory = result.result[i]
+
+            console.log(assetHistory)
+
+            if (!history[assetHistory.params._id]){
+              history[assetHistory.params._id] = {}
+            }
+            history[assetHistory.params._id]._id = assetHistory.params._id
+            history[assetHistory.params._id].name = assetHistory.params.name
+            const historyItem = {date:assetHistory.date, health_level:assetHistory.params.health_level}
+            if (!history[assetHistory.params._id].history){
+              history[assetHistory.params._id].history = [historyItem]
+            }  else {
+              history[assetHistory.params._id].history.push(historyItem)
+            }
+          }
+        }
+        return (res) ? res.json({success:true,result:history}) : {success:true,result:history};
+    } catch (error) {
+        return (res) ? res.status(500).json(`Error: ${error}`) : `Error: ${error}`
+    }
+  };
+
   const update = async (req, res) => {
     try {
         const { id } = req.params
@@ -131,5 +176,6 @@ module.exports = (app) => {
     remove,
     update,
     create,
+    history
   };
 };

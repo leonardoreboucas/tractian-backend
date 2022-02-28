@@ -679,6 +679,23 @@
         }
       }
     },
+    "/asset/history": {
+      "get": {
+        "tags": [
+          "Asset"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "500": {
+            "description": "Error on server"
+          }
+        }
+      }
+    },
     "/asset/{id}": {
       "get": {
         "tags": [
