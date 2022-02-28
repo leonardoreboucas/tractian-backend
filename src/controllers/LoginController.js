@@ -15,6 +15,7 @@ module.exports = (app) => {
         const query = {
             username: req.body.email,
             password: password_hash,
+            active: true
         }
         console.log("------------>",req)
         const userResult = await dao.getPage(query, sort, limit, page, collection);
