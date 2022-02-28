@@ -28,9 +28,11 @@ Build a CRUD where the user can register companies, units, assets and users.
 
 - A free tier MongoDB created on Atlas service
 - A Heroku free App connected to this project and deployed from it's source code
+- A NodeJS + Express + Swagger API application with router, controller and dao layers
 - Backend URL: https://tractianlrc.herokuapp.com
 
 ## How to run it locally
 - Dependencies: npm and git
 - Clone this project
 - Since inside the project folder run: `npm i && npm start`
+- Local URL: http://localhost:3001
