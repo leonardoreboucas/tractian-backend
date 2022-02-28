@@ -1,6 +1,7 @@
 const dao = require('../dao/defaultDAO')
 const collection = 'user'
 const validator = require('../utils/validator');
+const crypto = require('crypto')
 
 
 module.exports = (app) => {
@@ -67,6 +68,10 @@ module.exports = (app) => {
             });
           }
         }
+        
+        const password_hash = crypto.createHash('md5').update(req.body.password).digest("hex")
+        req.body.password = password_hash
+
         const result = await dao.update(id, req.body, collection)
         let status_code = 200
         if (!result || !result.result.modifiedCount){
@@ -96,6 +101,9 @@ module.exports = (app) => {
             errors: ["company not found"]
           });
         }
+
+        const password_hash = crypto.createHash('md5').update(req.body.password).digest("hex")
+        req.body.password = password_hash
 
         const result = await dao.create(req.body, collection)
         return res.json(result);

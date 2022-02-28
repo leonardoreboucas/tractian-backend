@@ -397,9 +397,8 @@ module.exports = (app) => {
 
   router
     .route(`/login`)
-      .post((req, res) => {
-        return res.json({"success":true,"result":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU4NzUzOTksImlkIjoiNjBiNGUyODJlYjMxNGIwMDE1ZmFmMmE5IiwiaWF0IjoxNjQ1Nzg4OTk5fQ.C92SLTyZAR-TIGOeFJTxMYT3bMO_1hlIF_KG0W2Ca0Y","admin":{"id":"60b4e282eb314b0015faf2a9","name":"admin","isLoggedIn":true}},"message":"Successfully login admin"})
-      }
+      .post(
+       app.controllers.LoginController.login
        /* >>> SWAGGER DOCUMENTATION (DONT DELETE) <<<
         #swagger.tags = ['Misc']
         #swagger.parameters['login'] = {

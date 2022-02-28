@@ -34,5 +34,5 @@ Build a CRUD where the user can register companies, units, assets and users.
 ## How to run it locally
 - Dependencies: npm and git
 - Clone this project
-- Since inside the project folder run: `npm i && npm start`
+- Since inside the project folder run: `npm i && npm start` or `npm i && npm run start-dev` (with autoreload)
 - Local URL: http://localhost:3001
