@@ -7,27 +7,13 @@ const config = require("../../../config/environment");
 const express = require('express');
 const router = express.Router();
 const { body } = require('express-validator')
-const path = require("path");
-const fs = require("fs");
-const environment = require("../../../config/environment");
 const multer = require("multer");
-
-const handleError = (err, res) => {
-  console.log(err)
-  res
-    .status(500)
-    .contentType("text/plain")
-    .end("Oops! Something went wrong!");
-};
-
 const upload = multer({
   dest: "/tmp/uploadedFiles"
 });
 
 module.exports = (app) => {       
-    
-  
-  
+
   /*******************************************
   *                   Company
   ********************************************/
@@ -373,31 +359,7 @@ module.exports = (app) => {
     .route(`/upload`)
       .post(
       upload.single("file"),
-      (req, res) => {
-        const tempPath = req.file.path;
-        const id = req.body.imgID;
-        const targetFolder = __dirname +'/uploads'
-        const targetPath = path.join(targetFolder, `./${id}.png`);
-        fs.mkdirSync(targetFolder, {recursive:true})
-        if (path.extname(req.file.originalname).toLowerCase() === ".png") {
-          fs.copyFile(tempPath, targetPath, err => {
-            if (err) return handleError(err, res);
-            res
-              .status(200)
-              .contentType("text/plain")
-              .json({result:`https://${environment.configuration.host}/uploads/${id}.png`});
-          });
-        } else {
-          fs.unlink(tempPath, err => {
-            if (err) return handleError(err, res);
-    
-            res
-              .status(403)
-              .contentType("text/plain")
-              .end("Only .png files are allowed!");
-          });
-        }
-      }
+      app.controllers.UploadController.upload
       /* >>> SWAGGER DOCUMENTATION (DONT DELETE) <<<
         #swagger.tags = ['Misc']
         #swagger.responses[200] = { description: "Successful"}
